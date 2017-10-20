@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, FlatList } from 'react-native';
 import {List, ListItem, SearchBar, ActivityIndicator} from 'react-native-elements';
 import {Colors, Fonts, Masonry} from '../style';
 import Button from 'react-native-button';
-import PersonCell from '../components/personCell';
+
 
 class FlatListScreen extends Component {
   static navigationOptions = {
@@ -25,7 +25,7 @@ class FlatListScreen extends Component {
     super(props);
     this.state = {
       people: [
-        {name: 'John', slogan: 'Eats candy for breakfast',favoriteCity: 'Atlanta'},
+        {name: 'John', slogan: 'Eats candy for breakfast', favoriteCity: 'Atlanta'},
         {name: 'Kyle', slogan: 'Stole his own identity', favoriteCity: 'Austin'},
         {name: 'Larry', slogan: 'A creature of the night', favoriteCity: 'Albuquerque'},
         {name: 'Mary', slogan: 'A teacher of the night' , favoriteCity: 'Tulsa'},

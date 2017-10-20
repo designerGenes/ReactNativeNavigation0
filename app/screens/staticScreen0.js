@@ -15,7 +15,7 @@ class StaticScreen0 extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate, state } = this.props.navigation;
     return(
       <View style={[styles.container, {backgroundColor: this.state.bgroundColor}]}>
         <View style={[Masonry.row]}>
