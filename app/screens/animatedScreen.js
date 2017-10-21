@@ -3,12 +3,41 @@ import {View, StyleSheet, Text, Animated} from 'react-native';
 import {Button} from 'react-native-elements';
 import { ButtonGroup } from 'react-native-elements'
 import { Colors, Fonts, Masonry } from '../style';
+var Dimensions = require('Dimensions');
+
+var { width, height } = Dimensions.get('window');
+var ORB_DIMENSIONS = 30;
+var SPRING_CONFIG = {tension: 2, friction: 2};
 
 export default class AnimatedScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pan: new Animated.ValueXY()
+    }
+    this.getStyle = this.getStyle.bind(this);
+    this._onSelectAnimation = this._onSelectAnimation.bind(this);
+  }
+
+  getStyle() {
+    return [
+      styles.orb, { transform : this.state.pan.getTranslateTransform() }
+    ]
+
+
+  }
+
   _onSelectAnimation(index) {
-    switch index {
+    switch (index) {
       case 0:
-        
+      Animated.sequence([
+        Animated.spring(this.state.pan, {
+          ...SPRING_CONFIG, toValue: {x:0, y: (height / 4) - ORB_DIMENSIONS}
+        }),
+        Animated.spring(this.state.pan, {
+          ...SPRING_CONFIG, toValue: {x:0, y: 0}
+        }),
+      ]).start();
         break;
       case 1:
         break;
@@ -19,7 +48,7 @@ export default class AnimatedScreen extends Component {
     return (
       <View style={[Masonry.container, {alignItems: 'center', paddingTop: 30} ]}>
         <View style={styles.orbBox}>
-          <View style={styles.orb} />
+          <Animated.View style={this.getStyle()} />
         </View>
         <View style={{flex: 1, backgroundColor: Colors.grayMid}} >
           <View style={{flex: 1}} />
@@ -44,8 +73,8 @@ const styles = StyleSheet.create({
   },
   orb: {
     backgroundColor: Colors.blue,
-    borderRadius: 25,
-    width: 50,
+    borderRadius: ORB_DIMENSIONS / 2,
+    width: ORB_DIMENSIONS,
     aspectRatio: 1
   }
 });
