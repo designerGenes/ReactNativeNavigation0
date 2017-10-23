@@ -7,37 +7,29 @@ var Color = require('color');
 const colorChoices = [Colors.blue, Colors.orange, Colors.red, Colors.green];
 
 export class DynamicScreen extends Component {
+  static navigationOptions = {
+    title: 'Dynamic Screen',
+  };
   constructor(props) {
     super(props);
-    var selectedIndex = 0; //this.params.selectedIndex || 0;
+    const {params} = this.props.navigation.state;
+
     this.state = {
-      bgroundColor: colorChoices[selectedIndex],
-      selectedIndex: selectedIndex,
-      hugRightEdge: 0
+      bgroundColor: colorChoices[params.selectedIndex],
+      selectedIndex: params.selectedIndex,
+      hugRightEdge: params.hugRightEdge
     }
-    this.setPageColor = this.setPageColor.bind(this);
-    this.setHugsRightEdge = this.setHugsRightEdge.bind(this);
   }
-  setPageColor(index) {
-    this.setState({
-      bgroundColor: colorChoices[index],
-      selectedIndex: index,
-    });
-  }
-  setHugsRightEdge(hugsRightEdge) {
-    this.setState({
-      hugRightEdge: hugsRightEdge
-    })
-  }
+
   render() {
+    const {navigate} = this.props.navigation;
     const bgroundColor = this.state.bgroundColor;
-    const usesDarkBackground = Color(bgroundColor).dark() || false;
+    const usesDarkBackground = Color(bgroundColor).dark();
     const textColor = usesDarkBackground ? 'black' : 'white';
     const altTextColor = usesDarkBackground ? 'white' : 'black';
     const hueStr = usesDarkBackground ? 'dark' : 'light';
     const bgroundHighlightColor = usesDarkBackground ? Color(bgroundColor).lighten(0.2) : Color(bgroundColor).darken(0.35);
     const onRightEdge = this.state.hugRightEdge;
-    const {navigate, params} = this.params
     return (
       <View style={[styles.container, {backgroundColor: bgroundColor}]}>
         <View style={[Masonry.row, {flex: 0.5}]}>
