@@ -8,7 +8,7 @@ export default {
     orange: '#FF5714',
     red: '#F71735',
     grayMid: '#595959',
-    grayLight: '#FFEAEE',
+    grayLight: '#747274',
     grayGunmetal: '#2E2E3A',
     screenColors: StyleSheet.create({
       green: { color: this.green },

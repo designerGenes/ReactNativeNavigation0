@@ -7,7 +7,7 @@ import Button from 'react-native-button';
 
 class FlatListScreen extends Component {
   static navigationOptions = {
-    title: 'Static 1',
+    title: 'FlatList',
   }
   renderSeparator = () => {
     return (

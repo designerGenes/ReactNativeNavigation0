@@ -17,6 +17,8 @@ export default class AnimatedScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      usesCombinedValue: 0,
+      combinedAnimatedValue: new Animated.Value(0),
       pan: new Animated.ValueXY(),
       diameter: new Animated.Value(ORB_DIMENSIONS),
       opacity: new Animated.Value(1)
@@ -27,16 +29,22 @@ export default class AnimatedScreen extends Component {
 
   orbStyle() {
     return [
-      styles.orb, { transform : this.state.pan.getTranslateTransform(),
+      styles.orb, !this.state.usesCombinedValue && { transform : this.state.pan.getTranslateTransform(),
                     width: this.state.diameter,
                     opacity: this.state.opacity
+                  },
+                  this.state.usesCombinedValue && {
+                    opacity: this.state.combinedAnimatedValue.interpolate({
+                      inputRange: [0, 0.5, 1],
+                      outputRange: [0, 1, 0]
+                    })
                   }
-    ]
+          ]
   }
 
   _onSelectAnimation(index) {
     switch (index) {
-      case 0:
+      case 0: // reposition
         Animated.sequence([
           Animated.timing(this.state.pan, {
             toValue: {x:0, y: (height / 4) - ORB_DIMENSIONS},
@@ -48,7 +56,7 @@ export default class AnimatedScreen extends Component {
           }),
         ]).start();
         break;
-      case 1:
+      case 1: // resize
         Animated.sequence([
           Animated.spring(this.state.diameter, {
             ...SPRING_CONFIG, toValue: ORB_DIMENSIONS * 2
@@ -58,7 +66,7 @@ export default class AnimatedScreen extends Component {
           }),
         ]).start();
         break;
-      case 2:
+      case 2: // fade out/in
       Animated.sequence([
         Animated.timing(this.state.opacity, {
           toValue: 0,
@@ -69,8 +77,14 @@ export default class AnimatedScreen extends Component {
           duration: 1000
         }),
         ]).start();
-
         break;
+      case 3: // combined
+        this.setState({combinedAnimatedValue: 0, usesCombinedValue: 1});
+        Animated.timing(this.state.combinedAnimatedValue, {
+          toValue: 1,
+          duration: 1000,
+          easing: Easing.linear
+        }).start();
     }
   }
 
@@ -84,7 +98,7 @@ export default class AnimatedScreen extends Component {
           <View style={{flex: 1}} />
           <ButtonGroup
             containerStyle={{width: '100%'}}
-            buttons={["Spring", "Resize", "Opacity"]}
+            buttons={["Spring", "Resize", "Opacity", "Combined"]}
             onPress={this._onSelectAnimation}
             />
         </View>
