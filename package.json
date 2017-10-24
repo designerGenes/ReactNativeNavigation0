@@ -1,33 +1,39 @@
 {
-	"name": "Navigation0",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"color": "^2.0.0",
-		"lodash": "^4.17.4",
-		"react": "16.0.0-beta.5",
-		"react-native": "0.49.3",
-		"react-native-button": "^2.1.0",
-		"react-native-elements": "^0.17.0",
-		"react-native-vector-icons": "^4.4.2",
-		"react-navigation": "^1.0.0-beta.13"
-	},
-	"devDependencies": {
-		"babel-jest": "21.2.0",
-		"babel-preset-react-native": "4.0.0",
-		"jest": "21.2.1",
-		"react-test-renderer": "16.0.0-beta.5"
-	},
-	"rnpm": {
-		"assets": [
-			"./app/assets/fonts"
-		]
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "Navigation0",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "storybook": "storybook start -p 7007"
+  },
+  "dependencies": {
+    "color": "^2.0.0",
+    "lodash": "^4.17.4",
+    "react": "16.0.0-beta.5",
+    "react-native": "0.49.3",
+    "react-native-button": "^2.1.0",
+    "react-native-elements": "^0.17.0",
+    "react-native-vector-icons": "^4.4.2",
+    "react-navigation": "^1.0.0-beta.13"
+  },
+  "devDependencies": {
+    "babel-jest": "21.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "21.2.1",
+    "react-test-renderer": "16.0.0-beta.5",
+    "@storybook/react-native": "^3.2.13",
+    "@storybook/addon-actions": "^3.2.13",
+    "@storybook/addon-links": "^3.2.13",
+    "react-dom": "16.0.0-beta.5",
+    "prop-types": "^15.6.0"
+  },
+  "rnpm": {
+    "assets": [
+      "./app/assets/fonts"
+    ]
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }

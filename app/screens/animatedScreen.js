@@ -78,13 +78,6 @@ export default class AnimatedScreen extends Component {
         }),
         ]).start();
         break;
-      case 3: // combined
-        this.setState({combinedAnimatedValue: 0, usesCombinedValue: 1});
-        Animated.timing(this.state.combinedAnimatedValue, {
-          toValue: 1,
-          duration: 1000,
-          easing: Easing.linear
-        }).start();
     }
   }
 
@@ -98,7 +91,7 @@ export default class AnimatedScreen extends Component {
           <View style={{flex: 1}} />
           <ButtonGroup
             containerStyle={{width: '100%'}}
-            buttons={["Spring", "Resize", "Opacity", "Combined"]}
+            buttons={["Spring", "Resize", "Opacity"]}
             onPress={this._onSelectAnimation}
             />
         </View>
